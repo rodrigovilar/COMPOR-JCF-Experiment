@@ -14,6 +14,7 @@ import br.ufcg.ppgcc.compor.jcf.experimento.fachada.Endereco;
 import br.ufcg.ppgcc.compor.jcf.experimento.fachada.FachadaExperimento;
 import br.ufcg.ppgcc.compor.jcf.experimento.fachada.FontePagadora;
 import br.ufcg.ppgcc.compor.jcf.experimento.fachada.RelatorioCompleto;
+import br.ufcg.ppgcc.compor.jcf.experimento.impl.FachadaExperimentoImpl;
 
 public class Experimento1Test {
 
@@ -22,7 +23,7 @@ public class Experimento1Test {
 	@Before
 	public void iniciar() {
 		//Coloque sua Fachada aqui.
-		fachada = null;
+		fachada = new FachadaExperimentoImpl();
 	}
 
 	@Test
