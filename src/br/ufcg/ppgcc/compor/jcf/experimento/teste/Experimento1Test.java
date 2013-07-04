@@ -142,7 +142,7 @@ public class Experimento1Test {
 		List<Dependente> dependentes1 = fachada.listarDependentes(titular1);
 		assertEquals(1, dependentes1.size());
 		assertEquals(dependente1, dependentes1.get(0));
-		
+
 		List<Dependente> dependentes2 = fachada.listarDependentes(titular2);
 		assertEquals(1, dependentes2.size());
 		assertEquals(dependente2, dependentes2.get(0));
