@@ -71,8 +71,7 @@ public class CalculoImpostoRenda {
 		return totalRecebido - deducao;
 	}
 
-	public double impostoDevido(double baseCalculo) {
-		
+	public double impostoDevido(double baseCalculo) {		
 		if (baseCalculo < 1637.11 * 12) { //isento
 			return 0.0; 
 		} 
