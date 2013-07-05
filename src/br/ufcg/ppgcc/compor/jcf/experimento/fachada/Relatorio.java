@@ -1,6 +1,6 @@
 package br.ufcg.ppgcc.compor.jcf.experimento.fachada;
 
-public class RelatorioCompleto {
+public class Relatorio {
 
 	private double impostoDevido;
 	private double impostoPago;

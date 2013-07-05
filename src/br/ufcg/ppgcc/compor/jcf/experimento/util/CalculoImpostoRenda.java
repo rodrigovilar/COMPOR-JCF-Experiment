@@ -2,13 +2,17 @@ package br.ufcg.ppgcc.compor.jcf.experimento.util;
 
 import java.util.List;
 
-import br.ufcg.ppgcc.compor.jcf.experimento.fachada.Declaracao;
+import br.ufcg.ppgcc.compor.jcf.experimento.fachada.Titular;
 import br.ufcg.ppgcc.compor.jcf.experimento.fachada.Dependente;
 import br.ufcg.ppgcc.compor.jcf.experimento.fachada.FontePagadora;
 
 public class CalculoImpostoRenda {
+	
+	public static double impostoAPagar(double impostoDevido, double impostoPago) {
+		return impostoDevido - impostoPago;
+	}
 
-	public static double impostoDevido(Declaracao declaracao, List<FontePagadora> fontes, 
+	public static double impostoDevido(Titular declaracao, List<FontePagadora> fontes, 
 			List<Dependente> dependentes) {
 		double totalRecebido = somaRenda(fontes);
 		double baseCalculo = descontoDependentes(totalRecebido, dependentes);

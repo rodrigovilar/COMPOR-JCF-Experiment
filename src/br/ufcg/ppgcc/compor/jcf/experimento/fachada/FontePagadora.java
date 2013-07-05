@@ -5,6 +5,7 @@ public class FontePagadora {
 	private String nome;
 	private String cpfCnpj;
 	private double rendimentoRecebidos;
+	private double impostoPago;
 
 
 	public String getNome() {
@@ -29,5 +30,13 @@ public class FontePagadora {
 
 	public void setRendimentoRecebidos(double rendimentoRecebidos) {
 		this.rendimentoRecebidos = rendimentoRecebidos;
+	}
+
+	public void setImpostoPago(double impostoPago) {
+		this.impostoPago = impostoPago;
+	}
+
+	public double getImpostoPago() {
+		return impostoPago;
 	}
 }

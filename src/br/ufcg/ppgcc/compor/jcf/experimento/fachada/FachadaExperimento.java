@@ -4,18 +4,24 @@ import java.util.List;
 
 public interface FachadaExperimento {
 
-	void criarNovaDeclaracao(Declaracao declaracao);
+	void criarTitular(Titular titular);
 
-	List<Declaracao> listarDeclaracoes();
+	List<Titular> listarTitulares();
 
-	void criarFontePagadora(Declaracao declaracao, FontePagadora fonte);
+	void criarFontePagadora(Titular titular, FontePagadora fonte);
 
-	RelatorioCompleto relatorioCompleto(Declaracao declaracao);
+	Relatorio relatorioCompleto(Titular titular);
 
-	void criarDependente(Declaracao declaracao, Dependente dependente);
+	void criarDependente(Titular titular, Pessoa dependente);
 
-	List<FontePagadora> listarFontes(Declaracao declaracao);
+	List<FontePagadora> listarFontes(Titular titular);
 
-	List<Dependente> listarDependentes(Declaracao declaracao);
+	List<Dependente> listarDependentes(Titular titular);
+
+	void criarGastoDedutivel(Titular titular, Pessoa realizador, GastoDedutivel gastoDedutivel);
+
+	List<GastoDedutivel> listarGastosDedutiveis(Titular titular, Pessoa realizador);
+
+	Relatorio relatorioSimplificado(Titular titular);
 
 }
