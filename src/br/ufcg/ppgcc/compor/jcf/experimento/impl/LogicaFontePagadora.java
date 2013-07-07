@@ -5,8 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import br.ufcg.ppgcc.compor.jcf.experimento.fachada.ExcecaoImpostoDeRenda;
 import br.ufcg.ppgcc.compor.jcf.experimento.fachada.Titular;
 import br.ufcg.ppgcc.compor.jcf.experimento.fachada.FontePagadora;
+import br.ufcg.ppgcc.compor.jcf.experimento.util.Validacao;
 
 public class LogicaFontePagadora {
 
@@ -25,6 +27,15 @@ public class LogicaFontePagadora {
 	}
 
 	public void criarFontePagadora(Titular titular, FontePagadora fonte) {
+		if(!Validacao.obrigatorio(fonte.getNome())) {
+			throw new ExcecaoImpostoDeRenda("O campo nome é obrigatório");
+		}
+
+		if(!Validacao.obrigatorio(fonte.getCpfCnpj())) {
+			throw new ExcecaoImpostoDeRenda("O campo CPF/CNPJ é obrigatório");
+		}
+
+		
 		if (fontes.get(titular) == null) {
 			fontes.put(titular, new ArrayList<FontePagadora>());
 		}

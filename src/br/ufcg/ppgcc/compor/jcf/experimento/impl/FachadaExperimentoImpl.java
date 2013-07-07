@@ -5,6 +5,8 @@ import java.util.List;
 import br.ufcg.ppgcc.compor.jcf.experimento.fachada.Dependente;
 import br.ufcg.ppgcc.compor.jcf.experimento.fachada.FachadaExperimento;
 import br.ufcg.ppgcc.compor.jcf.experimento.fachada.FontePagadora;
+import br.ufcg.ppgcc.compor.jcf.experimento.fachada.GastoDedutivel;
+import br.ufcg.ppgcc.compor.jcf.experimento.fachada.Pessoa;
 import br.ufcg.ppgcc.compor.jcf.experimento.fachada.Resultado;
 import br.ufcg.ppgcc.compor.jcf.experimento.fachada.Titular;
 
@@ -14,7 +16,7 @@ public class FachadaExperimentoImpl implements FachadaExperimento {
 	private LogicaFontePagadora logicaFontePagadora = LogicaFontePagadora.getInstancia();
 	private LogicaDependente logicaDependente = LogicaDependente.getInstancia();
 	private LogicaRelatorioCompleto logicaRelatorioCompleto = new LogicaRelatorioCompleto();
-
+	private LogicaGastoDedutivel logicaGastoDedutivel = new LogicaGastoDedutivel();
 	
 	public FachadaExperimentoImpl() {
 		logicaFontePagadora.limpar();
@@ -47,5 +49,23 @@ public class FachadaExperimentoImpl implements FachadaExperimento {
 
 	public List<Dependente> listarDependentes(Titular titular) {
 		return logicaDependente.getDependentes(titular);
+	}
+
+	@Override
+	public void criarGastoDedutivel(Titular titular, Pessoa realizador,
+			GastoDedutivel gastoDedutivel) {
+		logicaGastoDedutivel.criarGastoDedutivel(realizador, gastoDedutivel);
+	}
+
+	@Override
+	public List<GastoDedutivel> listarGastosDedutiveis(Titular titular,
+			Pessoa realizador) {
+		return logicaGastoDedutivel.listarGastosDedutiveis(realizador);
+	}
+
+	@Override
+	public Resultado relatorioSimplificado(Titular titular) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
