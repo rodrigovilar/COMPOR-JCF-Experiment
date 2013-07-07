@@ -15,12 +15,14 @@ public class FachadaExperimentoImpl implements FachadaExperimento {
 	private LogicaTitular logicaTitular = new LogicaTitular();
 	private LogicaFontePagadora logicaFontePagadora = LogicaFontePagadora.getInstancia();
 	private LogicaDependente logicaDependente = LogicaDependente.getInstancia();
+	private LogicaGastoDedutivel logicaGastoDedutivel = LogicaGastoDedutivel.getInstancia();
 	private LogicaRelatorioCompleto logicaRelatorioCompleto = new LogicaRelatorioCompleto();
-	private LogicaGastoDedutivel logicaGastoDedutivel = new LogicaGastoDedutivel();
+	private LogicaRelatorioSimplificado logicaRelatorioSimplificado = new LogicaRelatorioSimplificado();
 	
 	public FachadaExperimentoImpl() {
 		logicaFontePagadora.limpar();
 		logicaDependente.limpar();
+		logicaGastoDedutivel.limpar();
 	}
 	
 	public void criarNovoTitular(Titular titular) {
@@ -65,7 +67,6 @@ public class FachadaExperimentoImpl implements FachadaExperimento {
 
 	@Override
 	public Resultado relatorioSimplificado(Titular titular) {
-		// TODO Auto-generated method stub
-		return null;
+		return logicaRelatorioSimplificado.declaracaoSimplificada(titular);
 	}
 }

@@ -10,7 +10,20 @@ import br.ufcg.ppgcc.compor.jcf.experimento.fachada.Pessoa;
 
 public class LogicaGastoDedutivel {
 	
+	private static LogicaGastoDedutivel instance; 
+	
 	private Map<Pessoa, List<GastoDedutivel>> gastos = new HashMap<Pessoa, List<GastoDedutivel>>();
+
+
+	private LogicaGastoDedutivel() {}
+	
+	
+	public static LogicaGastoDedutivel getInstancia() {
+		if (instance == null) {
+			instance = new LogicaGastoDedutivel();
+		}
+		return instance;
+	}
 
 	public void criarGastoDedutivel(Pessoa realizador, GastoDedutivel gasto) {
 		if (gastos.get(realizador) == null) {
@@ -26,6 +39,11 @@ public class LogicaGastoDedutivel {
 		}
 		
 		return gastos.get(realizador);
+	}
+
+
+	public void limpar() {
+		gastos.clear();
 	}
 
 }

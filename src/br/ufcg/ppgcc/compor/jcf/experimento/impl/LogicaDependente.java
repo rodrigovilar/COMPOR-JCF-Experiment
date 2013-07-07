@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import br.ufcg.ppgcc.compor.jcf.experimento.fachada.Dependente;
+import br.ufcg.ppgcc.compor.jcf.experimento.fachada.ExcecaoImpostoDeRenda;
 import br.ufcg.ppgcc.compor.jcf.experimento.fachada.Titular;
+import br.ufcg.ppgcc.compor.jcf.experimento.util.Validacao;
 
 public class LogicaDependente {
 
@@ -25,6 +27,22 @@ public class LogicaDependente {
 	}
 
 	public void criarDependente(Titular titular, Dependente dependente) {
+		if(!Validacao.obrigatorio(dependente.getNome())) {
+			throw new ExcecaoImpostoDeRenda("O campo nome é obrigatório");
+		}
+
+		if(!Validacao.obrigatorio(dependente.getCpf())) {
+			throw new ExcecaoImpostoDeRenda("O campo CPF/CNPJ é obrigatório");
+		}
+
+		if(dependente.getTipo() <= 0) {
+			throw new ExcecaoImpostoDeRenda("O valor do campo tipo está inválido");
+		}
+
+		if(!Validacao.cpf(dependente.getCpf())) {
+			throw new ExcecaoImpostoDeRenda("O valor do campo CPF/CNPJ está inválido");
+		}
+
 		if (dependentes.get(titular) == null) {
 			dependentes.put(titular, new ArrayList<Dependente>());
 		}

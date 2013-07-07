@@ -35,7 +35,14 @@ public class LogicaFontePagadora {
 			throw new ExcecaoImpostoDeRenda("O campo CPF/CNPJ é obrigatório");
 		}
 
-		
+		if (fonte.getRendimentoRecebidos() <= 0) {
+			throw new ExcecaoImpostoDeRenda("O campo Rendimentos recebidos deve ser maior que zero");			
+		}
+
+		if(!Validacao.cpfOuCnpj(fonte.getCpfCnpj())) {
+			throw new ExcecaoImpostoDeRenda("O valor do campo CPF/CNPJ está inválido");
+		}
+
 		if (fontes.get(titular) == null) {
 			fontes.put(titular, new ArrayList<FontePagadora>());
 		}
