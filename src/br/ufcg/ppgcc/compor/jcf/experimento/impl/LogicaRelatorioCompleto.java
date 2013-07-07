@@ -32,9 +32,13 @@ public class LogicaRelatorioCompleto {
 		baseCalculo = CalculoImpostoRenda.descontoEducacao(baseCalculo, gastos);
 		baseCalculo = CalculoImpostoRenda.descontoSaude(baseCalculo, gastos);
 		double impostoDevido = CalculoImpostoRenda.impostoDevido(baseCalculo);
+
+		double impostoPago = CalculoImpostoRenda.totalPago(fontes);
 		
 		Resultado resultado = new Resultado();
 		resultado.setImpostoDevido(impostoDevido);
+		resultado.setImpostoPago(impostoPago);
+		resultado.setImpostoAPagar(impostoDevido - impostoPago); 
 		return resultado;
 	}
 
