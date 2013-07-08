@@ -6,6 +6,8 @@ import net.compor.frameworks.jcf.api.ComporFacade;
 import br.ufcg.ppgcc.compor.jcf.experimento.fachada.Dependente;
 import br.ufcg.ppgcc.compor.jcf.experimento.fachada.FachadaExperimento;
 import br.ufcg.ppgcc.compor.jcf.experimento.fachada.FontePagadora;
+import br.ufcg.ppgcc.compor.jcf.experimento.fachada.GastoDedutivel;
+import br.ufcg.ppgcc.compor.jcf.experimento.fachada.Pessoa;
 import br.ufcg.ppgcc.compor.jcf.experimento.fachada.Resultado;
 import br.ufcg.ppgcc.compor.jcf.experimento.fachada.Titular;
 
@@ -17,6 +19,7 @@ public class FachadaExperimentoImpl extends ComporFacade implements
 		add(new GerenteDeclaracao());
 		add(new GerenteFontePagadora());
 		add(new GerenteDependente());
+		add(new GerenteGastosDedutiveis());
 		add(new GerenteImpostoRenda());
 	}
 
@@ -51,6 +54,25 @@ public class FachadaExperimentoImpl extends ComporFacade implements
 	public List<Dependente> listarDependentes(Titular titular) {
 		return (List<Dependente>) requestService("listarDependentes",
 				titular);
+	}
+
+	@Override
+	public void criarGastoDedutivel(Titular titular, Pessoa realizador,
+			GastoDedutivel gastoDedutivel) {
+		requestService("criarGastoDedutivel", realizador, gastoDedutivel);
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<GastoDedutivel> listarGastosDedutiveis(Titular titular,
+			Pessoa realizador) {
+		return (List<GastoDedutivel>) requestService("listarGastosDedutiveis",
+				realizador);
+	}
+
+	@Override
+	public Resultado relatorioSimplificado(Titular titular) {
+		return (Resultado) requestService("declaracaoSimplificada", titular);
 	}
 
 }

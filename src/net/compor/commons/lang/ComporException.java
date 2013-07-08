@@ -45,14 +45,7 @@ public abstract class ComporException extends Exception {
     return cause;
   }
 
-  /*
-   * (non-Javadoc)
-   *
-   * @see java.lang.Throwable#getMessage()
-   */
-  public String getMessage() {
-    return this.getFormattedMessage();
-  }
+
 
   /*
    * (non-Javadoc)
