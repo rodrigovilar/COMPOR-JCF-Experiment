@@ -9,14 +9,15 @@ import br.ufcg.ppgcc.compor.jcf.experimento.util.CalculoImpostoRenda;
 
 public class LogicaRelatorioSimplificado {
 
+	private CalculoImpostoRenda calculo = new CalculoImpostoRenda();
+
 	public Resultado declaracaoSimplificada(Titular titular) {
 		List<FontePagadora> fontes = 
 				LogicaFontePagadora.getInstancia().getFontes(titular);
-		double totalRecebido = CalculoImpostoRenda.totalRecebido(fontes);
-		double baseCalculo = CalculoImpostoRenda.deducaoSimplificada(totalRecebido);
+		double totalRecebido = calculo.totalRecebido(fontes);
+		double baseCalculo = calculo.deducaoSimplificada(totalRecebido);
 
-		double impostoDevido = 
-				CalculoImpostoRenda.impostoDevido(baseCalculo);
+		double impostoDevido = calculo.impostoDevido(baseCalculo);
 		
 		Resultado resultado = new Resultado();
 		resultado.setImpostoDevido(impostoDevido);

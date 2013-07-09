@@ -12,6 +12,8 @@ import br.ufcg.ppgcc.compor.jcf.experimento.util.Validacao;
 
 public class LogicaDependente {
 
+	private Validacao validacao = new Validacao();
+	
 	private static LogicaDependente instancia;
 
 	private Map<Titular, List<Dependente>> dependentes = new HashMap<Titular, List<Dependente>>();
@@ -27,11 +29,11 @@ public class LogicaDependente {
 	}
 
 	public void criarDependente(Titular titular, Dependente dependente) {
-		if(!Validacao.obrigatorio(dependente.getNome())) {
+		if(!validacao.obrigatorio(dependente.getNome())) {
 			throw new ExcecaoImpostoDeRenda("O campo nome é obrigatório");
 		}
 
-		if(!Validacao.obrigatorio(dependente.getCpf())) {
+		if(!validacao.obrigatorio(dependente.getCpf())) {
 			throw new ExcecaoImpostoDeRenda("O campo CPF/CNPJ é obrigatório");
 		}
 
@@ -39,7 +41,7 @@ public class LogicaDependente {
 			throw new ExcecaoImpostoDeRenda("O valor do campo tipo está inválido");
 		}
 
-		if(!Validacao.cpf(dependente.getCpf())) {
+		if(!validacao.cpf(dependente.getCpf())) {
 			throw new ExcecaoImpostoDeRenda("O valor do campo CPF/CNPJ está inválido");
 		}
 

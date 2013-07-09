@@ -12,6 +12,8 @@ import br.ufcg.ppgcc.compor.jcf.experimento.util.Validacao;
 
 public class LogicaFontePagadora {
 
+	private Validacao validacao = new Validacao();
+
 	private static LogicaFontePagadora instancia;
 
 	private Map<Titular, List<FontePagadora>> fontes = new HashMap<Titular, List<FontePagadora>>();
@@ -27,11 +29,11 @@ public class LogicaFontePagadora {
 	}
 
 	public void criarFontePagadora(Titular titular, FontePagadora fonte) {
-		if(!Validacao.obrigatorio(fonte.getNome())) {
+		if(!validacao.obrigatorio(fonte.getNome())) {
 			throw new ExcecaoImpostoDeRenda("O campo nome é obrigatório");
 		}
 
-		if(!Validacao.obrigatorio(fonte.getCpfCnpj())) {
+		if(!validacao.obrigatorio(fonte.getCpfCnpj())) {
 			throw new ExcecaoImpostoDeRenda("O campo CPF/CNPJ é obrigatório");
 		}
 
@@ -39,7 +41,7 @@ public class LogicaFontePagadora {
 			throw new ExcecaoImpostoDeRenda("O campo Rendimentos recebidos deve ser maior que zero");			
 		}
 
-		if(!Validacao.cpfOuCnpj(fonte.getCpfCnpj())) {
+		if(!validacao.cpfOuCnpj(fonte.getCpfCnpj())) {
 			throw new ExcecaoImpostoDeRenda("O valor do campo CPF/CNPJ está inválido");
 		}
 
