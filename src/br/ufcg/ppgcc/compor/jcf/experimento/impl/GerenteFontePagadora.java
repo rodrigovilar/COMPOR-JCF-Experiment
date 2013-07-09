@@ -19,7 +19,6 @@ public class GerenteFontePagadora extends Component {
 		super("Gerente de fontes pagadoras");
 	}
 
-	@Service(name = "criarFontePagadora")
 	public void criarNovaFontePagadora(Titular titular,
 			FontePagadora fontePagadora) {
 		inicializarLista(titular);

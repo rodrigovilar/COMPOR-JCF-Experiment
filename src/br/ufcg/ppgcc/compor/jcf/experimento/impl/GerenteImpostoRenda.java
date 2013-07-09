@@ -14,6 +14,8 @@ import br.ufcg.ppgcc.compor.jcf.experimento.util.CalculoImpostoRenda;
 
 public class GerenteImpostoRenda extends Component {
 	
+	private CalculoImpostoRenda calculo = new CalculoImpostoRenda();
+	
 	public GerenteImpostoRenda() {
 		super("Gerente dos cálculos de imposto de renda");
 	}
@@ -34,13 +36,13 @@ public class GerenteImpostoRenda extends Component {
 					requestService("listarGastosDedutiveis", dependente));
 		}
 		
-		double totalRecebido = CalculoImpostoRenda.totalRecebido(fontes);
-		double baseCalculo = CalculoImpostoRenda.descontoDependentes(totalRecebido, dependentes);
-		baseCalculo = CalculoImpostoRenda.descontoEducacao(baseCalculo, gastos);
-		baseCalculo = CalculoImpostoRenda.descontoSaude(baseCalculo, gastos);
-		double impostoDevido = CalculoImpostoRenda.impostoDevido(baseCalculo);
+		double totalRecebido = calculo.totalRecebido(fontes);
+		double baseCalculo = calculo.descontoDependentes(totalRecebido, dependentes);
+		baseCalculo = calculo.descontoEducacao(baseCalculo, gastos);
+		baseCalculo = calculo.descontoSaude(baseCalculo, gastos);
+		double impostoDevido = calculo.impostoDevido(baseCalculo);
 
-		double impostoPago = CalculoImpostoRenda.totalPago(fontes);
+		double impostoPago = calculo.totalPago(fontes);
 		
 		Resultado relatorio = new Resultado();
 		relatorio.setImpostoDevido(impostoDevido);
@@ -48,5 +50,23 @@ public class GerenteImpostoRenda extends Component {
 		relatorio.setImpostoAPagar(impostoDevido - impostoPago); 
 		return relatorio;
 	}
-	
+
+	@SuppressWarnings("unchecked")
+	@Service(requiredServices="listarFontesPagadoras")
+	public Resultado declaracaoSimplificada(Titular titular) {
+		List<FontePagadora> fontes = (List<FontePagadora>) 
+				requestService("listarFontesPagadoras", titular);
+
+		double totalRecebido = calculo.totalRecebido(fontes);
+		double baseCalculo = calculo.deducaoSimplificada(totalRecebido);
+		double impostoDevido = calculo.impostoDevido(baseCalculo);
+		double impostoPago = calculo.totalPago(fontes);
+		
+		Resultado relatorio = new Resultado();
+		relatorio.setImpostoDevido(impostoDevido);
+		relatorio.setImpostoPago(impostoPago);
+		relatorio.setImpostoAPagar(impostoDevido - impostoPago); 
+		return relatorio;		
+	}
+
 }

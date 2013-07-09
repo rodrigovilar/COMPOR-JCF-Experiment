@@ -92,13 +92,23 @@ public class ComporFacade {
 			ServiceResponse response = compor.exec(request);
 	
 			if (response.hasException()) {
-				throw new RuntimeException(response.getException());
+				Throwable exception = response.getException();
+				throw exceptionToThrow(exception);
+				
 			} else {
 				return response.getData();
 			}
 			
-		} catch (Exception e) {
-			throw new RuntimeException(e);
+		} catch (Throwable e) {
+			throw exceptionToThrow(e);
+		}
+	}
+
+	private RuntimeException exceptionToThrow(Throwable exception) {
+		if (exception instanceof RuntimeException) {
+			return (RuntimeException) exception;
+		} else {
+			return new RuntimeException(exception);
 		}
 	}
 

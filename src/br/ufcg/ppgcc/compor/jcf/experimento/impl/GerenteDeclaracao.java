@@ -16,7 +16,6 @@ public class GerenteDeclaracao extends Component {
 		super("Gerente de titulares");
 	}
 
-	@Service(name="criarTitular")
 	public void criarTitular(Titular titular) {
 		titulares.add(titular);
 	}

@@ -16,9 +16,18 @@ public class FachadaExperimentoImpl extends ComporFacade implements
 
 	@Override
 	protected void addComponents() {
-		add(new GerenteDeclaracao());
-		add(new GerenteFontePagadora());
-		add(new GerenteDependente());
+		GerenteDeclaracao gerenteDeclaracao = new GerenteDeclaracao();
+		add(gerenteDeclaracao);
+		add(new ValidacaoTitular(gerenteDeclaracao));
+
+		GerenteFontePagadora gerenteFontePagadora = new GerenteFontePagadora();
+		add(gerenteFontePagadora);
+		add(new ValidacaoFontePagadora(gerenteFontePagadora));
+		
+		GerenteDependente gerenteDependente = new GerenteDependente();
+		add(gerenteDependente);
+		add(new ValidacaoDependente(gerenteDependente));
+		
 		add(new GerenteGastosDedutiveis());
 		add(new GerenteImpostoRenda());
 	}
